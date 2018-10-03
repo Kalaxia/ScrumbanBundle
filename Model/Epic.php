@@ -48,7 +48,7 @@ abstract class Epic implements CardInterface, EstimableInterface
         return $this->title;
     }
     
-    public function setStatus(string $status): self
+    public function setStatus(string $status): CardInterface
     {
         $this->status = $status;
         

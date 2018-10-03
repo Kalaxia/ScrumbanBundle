@@ -80,7 +80,7 @@ abstract class UserStory implements CardInterface, EstimableInterface
         return $this->value;
     }
     
-    public function setStatus(string $status): self
+    public function setStatus(string $status): CardInterface
     {
         $this->status = $status;
         
