@@ -6,13 +6,16 @@ final class TrelloRegistry
 {
     /** @var array **/
     private $boards;
+    /** @var array **/
+    private $columns;
     
-    public function __construct(array $boards)
+    public function __construct(array $boards, array $columns)
     {
         $this->boards = $boards;
+        $this->columns = $columns;
     }
     
-    public function hasBoard(string $name)
+    public function hasBoard(string $name): bool
     {
         return isset($this->boards[$name]);
     }
@@ -21,6 +24,19 @@ final class TrelloRegistry
     {
         if ($this->hasBoard($name)) {
             return $this->boards[$name];
+        }
+        return null;
+    }
+    
+    public function hasColumn(string $name): bool
+    {
+        return in_array($name, $this->columns);
+    }
+    
+    public function getColumn(string $name): array
+    {
+        if ($this->hasColumn($name)) {
+            return $this->columns[$name];
         }
         return null;
     }

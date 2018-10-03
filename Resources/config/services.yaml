@@ -16,6 +16,7 @@ services:
         public: false
         arguments:
             $boards: '%scrumban.trello.boards%'
+            $columns: '%scrumban.trello.columns%'
             
     Scrumban\Gateway\TrelloGateway:
         public: false
