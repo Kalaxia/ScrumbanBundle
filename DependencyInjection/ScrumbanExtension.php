@@ -13,25 +13,35 @@ use Scrumban\Model\CardInterface;
 class ScrumbanExtension extends Extension
 {
     const TRELLO_DEFAULT_COLUMNS = [
+        'ready' => [
+            'name' => 'ready',
+            'type' => CardInterface::CARD_TYPE_US,
+            'status' => CardInterface::STATUS_READY,
+        ],
         'todo' => [
             'name' => 'todo',
             'type' => CardInterface::CARD_TYPE_US,
+            'status' => CardInterface::STATUS_TODO,
         ],
         'in_progress' => [
             'name' => 'in_progress',
             'type' => CardInterface::CARD_TYPE_US,
+            'status' => CardInterface::STATUS_IN_PROGRESS,
         ],
-        'to_validate' => [
+        'review' => [
             'name' => 'to_validate',
             'type' => CardInterface::CARD_TYPE_US,
+            'status' => CardInterface::STATUS_REVIEW,
         ],
         'to_deploy' => [
-            'name' => 'to_deploy',
+            'name' => 'to_release',
             'type' => CardInterface::CARD_TYPE_US,
+            'status' => CardInterface::STATUS_TO_RELEASE,
         ],
         'done' => [
             'name' => 'done',
-            'type' => CardInterface::CARD_TYPE_US
+            'type' => CardInterface::CARD_TYPE_US,
+            'status' => CardInterface::STATUS_DONE,
         ]
     ];
     

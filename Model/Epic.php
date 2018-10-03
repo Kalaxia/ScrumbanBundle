@@ -8,6 +8,8 @@ abstract class Epic implements CardInterface, EstimableInterface
     protected $id;
     /** @var string **/
     protected $title;
+    /** @var string **/
+    protected $status;
     /** @var int **/
     protected $estimatedTime;
     /** @var int **/
@@ -44,6 +46,18 @@ abstract class Epic implements CardInterface, EstimableInterface
     public function getTitle(): string
     {
         return $this->title;
+    }
+    
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+        
+        return $this;
+    }
+    
+    public function getStatus(): string
+    {
+        return $this->status;
     }
     
     public function setEstimatedTime(int $estimatedTime): EstimableInterface

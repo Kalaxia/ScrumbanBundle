@@ -12,6 +12,8 @@ abstract class UserStory implements CardInterface, EstimableInterface
     protected $description;
     /** @var int **/
     protected $value;
+    /** @var string **/
+    protected $status;
     /** @var int **/
     protected $estimatedTime;
     /** @var int **/
@@ -76,6 +78,18 @@ abstract class UserStory implements CardInterface, EstimableInterface
     public function getValue(): int
     {
         return $this->value;
+    }
+    
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+        
+        return $this;
+    }
+    
+    public function getStatus(): string
+    {
+        return $this->status;
     }
     
     public function setEstimatedTime(int $estimatedTime): EstimableInterface
