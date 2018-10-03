@@ -1,0 +1,23 @@
+---
+parameters:
+    scrumban.trello.boards: []
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Scrumban\:
+        resource: '../../*'
+        exclude: '../../{Entity,Tests,ScrumbanBundle.php}'
+    
+    Scrumban\Registry\TrelloRegistry:
+        public: false
+        arguments:
+            $boards: '%scrumban.trello.boards%'
+            
+    Scrumban\Gateway\TrelloGateway:
+        public: false
+        arguments:
+            $trelloUrl: 'https://api.trello.com'
