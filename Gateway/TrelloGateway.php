@@ -3,9 +3,8 @@
 namespace Scrumban\Gateway;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
 
-class TrelloGateway
+class TrelloGateway extends Gateway
 {
     /** @var Client **/
     protected $client;
@@ -17,6 +16,16 @@ class TrelloGateway
     
     public function getBoard(string $id)
     {
-        return $this->client->get("/1/boards/{$id}")->getBody()->getContents();
+        return $this->get("/1/boards/{$id}");
+    }
+    
+    public function getBoardColumns(string $id)
+    {
+        return $this->get("/1/boards/${id}/lists");
+    }
+    
+    public function getColumnCards(string $id)
+    {
+        return $this->get("/1/lists/${id}/cards");
     }
 }
