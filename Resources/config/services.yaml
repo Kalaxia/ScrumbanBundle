@@ -12,6 +12,15 @@ services:
         resource: '../../*'
         exclude: '../../{Entity,Tests,ScrumbanBundle.php}'
     
+    Scrumban\Manager\:
+        resource: '../../Manager'
+        public: true
+    
+    scrumban.trello_manager:
+        class: 'Scrumban\Manager\BoardManager'
+        autowire: true
+        public: true
+    
     Scrumban\Registry\TrelloRegistry:
         public: false
         arguments:

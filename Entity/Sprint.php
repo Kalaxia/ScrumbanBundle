@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Scrumban\Model\Sprint as SprintModel;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Scrumban\Repository\SprintRepository")
  * @ORM\Table(name="scrumban__sprints")
  */
 class Sprint extends SprintModel
@@ -19,7 +19,7 @@ class Sprint extends SprintModel
      */
     protected $id;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $demoUrl;
     /**
