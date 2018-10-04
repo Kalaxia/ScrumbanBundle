@@ -10,6 +10,9 @@ use Scrumban\Event\SprintCreationEvent;
 
 use Scrumban\Entity\Sprint;
 
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+
 class SprintManager
 {
     /** @var ObjectManager **/
@@ -28,8 +31,16 @@ class SprintManager
         return $this->om->getRepository(Sprint::class)->getCurrentSprint();
     }
     
-    public function createSprint($beginAt, $endedAt): Sprint
+    public function createSprint(\DateTime $beginAt, \DateTime $endedAt): Sprint
     {
+        if ($beginAt >= $endedAt) {
+            throw new BadRequestHttpException('The begin date must preceed the end date');
+        }
+        if (count($existingSprints = $this->om->getRepository(Sprint::class)->getSprintByPeriod($beginAt, $endedAt)) > 0) {
+            throw new ConflictHttpException(
+                "The given dates conflict with sprint {$existingSprints[0]->getId()} [{$existingSprints[0]->getBeginAt()->format('Y-m-d H:i:s')} - {$existingSprints[0]->getEndedAt()->format('Y-m-d H:i:s')}]"
+            );
+        }
         $sprint =
             (new Sprint())
             ->setBeginAt($beginAt)
