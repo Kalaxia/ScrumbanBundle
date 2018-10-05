@@ -2,12 +2,16 @@
 
 namespace Scrumban\Registry;
 
+use Scrumban\Entity\UserStory;
+
 final class TrelloRegistry implements RegistryInterface
 {
     /** @var array **/
     private $boards;
     /** @var array **/
     private $columns;
+    /** @var array **/
+    private $userStories;
     
     public function __construct(array $boards, array $columns)
     {
@@ -28,5 +32,17 @@ final class TrelloRegistry implements RegistryInterface
             }
         }
         return null;
+    }
+    
+    public function storeUserStories(array $userStories = [])
+    {
+        foreach ($userStories as $userStory) {
+            $this->userStories[$userStory->getId()] = $userStory;
+        }
+    }
+    
+    public function getUserStory(string $id): ?UserStory
+    {
+        return $this->userStories[$id] ?? null;
     }
 }

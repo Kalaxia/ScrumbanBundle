@@ -8,6 +8,7 @@ use Scrumban\Entity\Sprint;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use Scrumban\Event\UserStoryCreationEvent;
+use Scrumban\Event\UserStoryUpdateEvent;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -24,7 +25,7 @@ final class UserStoryManager
         $this->eventDispatcher = $eventDispatcher;
     }
     
-    public function createUserStory(string $id, string $title, string $description, string $value, string $status, float $estimatedTime, float $spentTime, Sprint $sprint = null)
+    public function createUserStory(string $id, string $title, string $description, string $value, string $status, float $estimatedTime, float $spentTime, Sprint $sprint = null): UserStory
     {
         $userStory =
             (new UserStory())
@@ -43,5 +44,27 @@ final class UserStoryManager
         $this->om->flush();
         $this->eventDispatcher->dispatch(UserStoryCreationEvent::NAME, new UserStoryCreationEvent($userStory));
         return $userStory;
+    }
+    
+    public function updateUserStory(string $id, string $title, string $description, string $value, string $status, float $estimatedTime, float $spentTime, Sprint $sprint = null, UserStory $userStory = null)
+    {
+        $userStory
+            ->setTitle($title)
+            ->setDescription($description)
+            ->setValue($value)
+            ->setStatus($status)
+            ->setEstimatedTime($estimatedTime)
+            ->setSpentTime($spentTime)
+        ;
+        if ($sprint !== null) {
+            $userStory->setSprint($sprint);
+        }
+        $this->om->flush();
+        $this->eventDispatcher->dispatch(UserStoryUpdateEvent::NAME, new UserStoryUpdateEvent($userStory));
+    }
+    
+    public function getAll(): array
+    {
+        return $this->om->getRepository(UserStory::class)->findAll();
     }
 }

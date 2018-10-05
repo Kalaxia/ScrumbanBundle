@@ -14,9 +14,9 @@ abstract class UserStory implements CardInterface, EstimableInterface
     protected $value;
     /** @var string **/
     protected $status;
-    /** @var int **/
+    /** @var float **/
     protected $estimatedTime;
-    /** @var int **/
+    /** @var float **/
     protected $spentTime;
     /** @var Sprint **/
     protected $sprint;
@@ -92,26 +92,26 @@ abstract class UserStory implements CardInterface, EstimableInterface
         return $this->status;
     }
     
-    public function setEstimatedTime(int $estimatedTime): EstimableInterface
+    public function setEstimatedTime(float $estimatedTime): EstimableInterface
     {
         $this->estimatedTime = $estimatedTime;
         
         return $this;
     }
     
-    public function getEstimatedTime(): int
+    public function getEstimatedTime(): float
     {
         return $this->estimatedTime;
     }
     
-    public function setSpentTime(int $spentTime): EstimableInterface
+    public function setSpentTime(float $spentTime): EstimableInterface
     {
         $this->spentTime = $spentTime;
         
         return $this;
     }
     
-    public function getSpentTime(): int
+    public function getSpentTime(): float
     {
         return $this->spentTime;
     }

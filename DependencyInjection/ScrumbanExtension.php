@@ -29,11 +29,11 @@ class ScrumbanExtension extends Extension
             'status' => CardInterface::STATUS_IN_PROGRESS,
         ],
         'review' => [
-            'name' => 'to_validate',
+            'name' => 'review',
             'type' => CardInterface::CARD_TYPE_US,
             'status' => CardInterface::STATUS_REVIEW,
         ],
-        'to_deploy' => [
+        'to_release' => [
             'name' => 'to_release',
             'type' => CardInterface::CARD_TYPE_US,
             'status' => CardInterface::STATUS_TO_RELEASE,

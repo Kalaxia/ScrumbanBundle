@@ -37,6 +37,7 @@ class BoardManager
         if (($boardData = $this->registry->getBoard($boardName)) === null) {
             throw new \InvalidArgumentException('No board is configured for the given name');
         }
+        $this->init();
         $columns = $this->gateway->getBoardColumns($boardData['id']);
         $currentSprint = $this->sprintManager->getCurrentSprint();
 
@@ -53,6 +54,11 @@ class BoardManager
         }
     }
     
+    protected function init()
+    {
+        $this->registry->storeUserStories($this->userStoryManager->getAll());
+    }
+    
     protected function processColumnCards(string $columnId, array $column, Sprint $sprint = null)
     {
         $cards = $this->gateway->getColumnCards($columnId);
@@ -62,7 +68,13 @@ class BoardManager
             $extraData = isset($titleParts[1]) ? trim($titleParts[1]): '';
             
             $estimations = $this->getCardEstimations($card, $extraData);
-            $this->userStoryManager->createUserStory(
+                    
+            $method =
+                (($userStory = $this->registry->getUserStory($card['id'])) === null)
+                ? 'createUserStory'
+                : 'updateUserStory'
+            ;
+            $this->userStoryManager->{$method}(
                 $card['id'],
                 trim($titleParts[0]),
                 $card['desc'],
@@ -70,7 +82,8 @@ class BoardManager
                 $column['status'],
                 $estimations['estimated'],
                 $estimations['spent'],
-                CardHelper::isInCurrentSprint($column['status']) ? $sprint : null
+                CardHelper::isInCurrentSprint($column['status']) ? $sprint : null,
+                $userStory
             );
         }
     }
