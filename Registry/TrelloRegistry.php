@@ -15,28 +15,17 @@ final class TrelloRegistry implements RegistryInterface
         $this->columns = $columns;
     }
     
-    public function hasBoard(string $name): bool
-    {
-        return isset($this->boards[$name]);
-    }
-    
     public function getBoard(string $name): ?array
     {
-        if ($this->hasBoard($name)) {
-            return $this->boards[$name];
-        }
-        return null;
-    }
-    
-    public function hasColumn(string $name): bool
-    {
-        return isset($this->columns[$name]);
+        return $this->boards[$name] ?? null;
     }
     
     public function getColumn(string $name): ?array
     {
-        if ($this->hasColumn($name)) {
-            return $this->columns[$name];
+        foreach ($this->columns as $column) {
+            if ($column['name'] === $name) {
+                return $column;
+            }
         }
         return null;
     }
