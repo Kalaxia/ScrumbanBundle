@@ -96,7 +96,7 @@ abstract class UserStory implements CardInterface, EstimableInterface
     {
         $this->estimatedTime = $estimatedTime;
         
-        return self;
+        return $this;
     }
     
     public function getEstimatedTime(): int
