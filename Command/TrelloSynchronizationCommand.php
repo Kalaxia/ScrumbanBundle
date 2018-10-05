@@ -21,6 +21,16 @@ class TrelloSynchronizationCommand extends ContainerAwareCommand
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getContainer()->get('scrumban.trello_manager')->sync($input->getArgument('board_name'));
+        $output->writeln(
+            "<fg=white;bg=cyan>\n\n Beginning board synchronization !\n</>\n"
+        );
+        $messages = $this->getContainer()->get('scrumban.trello_manager')->sync($input->getArgument('board_name'));
+        
+        foreach ($messages as $type => $message) {
+            $output->writeln("<{$type}>$message</{$type}>");
+        }
+        $output->writeln(
+            "<fg=white;bg=green>\n\n Synchronization is complete !\n</>\n"
+        );
     }
 }

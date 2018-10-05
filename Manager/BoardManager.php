@@ -41,16 +41,23 @@ class BoardManager
         $currentSprint = $this->sprintManager->getCurrentSprint();
 
         foreach ($columns as $columnData) {
+            yield "comment" => "Scanning column {$columnData['name']}...";
             if (($column = $this->registry->getColumn(CardHelper::slugify($columnData['name']))) === null) {
                 continue;
             }
-            $this->processColumnCards($columnData['id'], $column, $currentSprint);
+            $messages = $this->processColumnCards($columnData['id'], $column, $currentSprint);
+            foreach($messages as $type => $message) {
+                yield $type => $message;
+            }
+            yield "info" => "Column {$columnData['name']} has been synchronized";
         }
     }
     
     protected function processColumnCards(string $columnId, array $column, Sprint $sprint = null)
     {
-        foreach ($this->gateway->getColumnCards($columnId) as $card) {
+        $cards = $this->gateway->getColumnCards($columnId);
+        yield "info" => count($cards) . " cards to synchronize with status {$column['status']}";
+        foreach ($cards as $card) {
             $titleParts = explode('|', $card['name']);
             $extraData = isset($titleParts[1]) ? trim($titleParts[1]): '';
             
