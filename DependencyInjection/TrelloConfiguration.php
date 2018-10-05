@@ -17,6 +17,7 @@ class TrelloConfiguration implements ConfigurationInterface
             ->children()
                 ->arrayNode('trello')->canBeUnset()
                     ->children()
+                        ->booleanNode('has_plus_for_trello')->end()
                         ->arrayNode('boards')
                             ->useAttributeAsKey('name')
                             ->prototype('array')

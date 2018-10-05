@@ -65,5 +65,9 @@ class ScrumbanExtension extends Extension
         
         $container->getDefinition(\Scrumban\Registry\TrelloRegistry::class)->setPublic(true);
         $container->getDefinition(\Scrumban\Gateway\TrelloGateway::class)->setPublic(true);
+        
+        if (isset($config['has_plus_for_trello'])) {
+            $container->getDefinition('scrumban.trello_manager')->setProperty('hasPlusForTrello', $config['has_plus_for_trello']);
+        }
     }
 }
