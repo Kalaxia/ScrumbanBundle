@@ -2,7 +2,7 @@
 
 namespace Scrumban\Registry;
 
-final class TrelloRegistry
+final class TrelloRegistry implements RegistryInterface
 {
     /** @var array **/
     private $boards;
@@ -20,7 +20,7 @@ final class TrelloRegistry
         return isset($this->boards[$name]);
     }
     
-    public function getBoard(string $name)
+    public function getBoard(string $name): ?array
     {
         if ($this->hasBoard($name)) {
             return $this->boards[$name];
@@ -30,10 +30,10 @@ final class TrelloRegistry
     
     public function hasColumn(string $name): bool
     {
-        return in_array($name, $this->columns);
+        return isset($this->columns[$name]);
     }
     
-    public function getColumn(string $name): array
+    public function getColumn(string $name): ?array
     {
         if ($this->hasColumn($name)) {
             return $this->columns[$name];

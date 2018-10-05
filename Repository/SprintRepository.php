@@ -10,8 +10,12 @@ class SprintRepository extends EntityRepository
     {
         $now = new \DateTime();
         return $this->createQueryBuilder('s')
-            ->where('s.beginAt <= ?', $now->format('Y-m-d H:i:s'))
-            ->andWhere('s.endedAt >= ?', $now->format('Y-m-d H:i:s'))
+            ->where('s.beginAt <= :begin_at')
+            ->andWhere('s.endedAt >= :ended_at')
+            ->setParameters([
+                'begin_at' => $now->format('Y-m-d H:i:s'),
+                'ended_at' => $now->format('Y-m-d H:i:s')
+            ])
             ->getQuery()
             ->getOneOrNullResult();
     }

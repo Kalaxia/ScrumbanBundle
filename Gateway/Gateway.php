@@ -2,7 +2,7 @@
 
 namespace Scrumban\Gateway;
 
-abstract class Gateway
+abstract class Gateway implements GatewayInterface
 {
     public function get($url)
     {

@@ -21,11 +21,16 @@ class TrelloGateway extends Gateway
     
     public function getBoardColumns(string $id)
     {
-        return $this->get("/1/boards/${id}/lists");
+        return $this->get("/1/boards/{$id}/lists");
     }
     
     public function getColumnCards(string $id)
     {
-        return $this->get("/1/lists/${id}/cards");
+        return $this->get("/1/lists/{$id}/cards");
+    }
+    
+    public function getCardComments(string $id)
+    {
+        return $this->get("/1/cards/{$id}/actions?filter=commentCard");
     }
 }
