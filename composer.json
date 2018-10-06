@@ -1,0 +1,34 @@
+{
+    "name": "kalaxia/scrumban-bundle",
+    "description": "Symfony bundle to wrap your project sprints data from external boards",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Axel Venet",
+            "email": "kern046@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "symfony/framework-bundle": "^3.0||^4.0",
+        "doctrine/common": "^2.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Scrumban\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Scrumban\\Tests\\": "/Tests/"
+        }
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "^1.9",
+        "doctrine/orm": "^2.6"
+    }
+}
