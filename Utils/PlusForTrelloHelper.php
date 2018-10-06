@@ -16,8 +16,8 @@ class PlusForTrelloHelper
                 continue;
             }
             $parts = explode('/', $text);
-            $estimated += (float) $parts[0];
-            $spent += (float) $parts[1];
+            $spent += (float) array_reverse(explode(' ', $parts[0]))[0];
+            $estimated += (float) $parts[1];
         }
         return [
             'estimated' => $estimated,
