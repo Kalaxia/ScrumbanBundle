@@ -10,7 +10,25 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "symfony/framework-bundle": "^3.0||^4.0"
+        "php": "^7.1",
+        "symfony/framework-bundle": "^3.0||^4.0",
+        "doctrine/common": "^2.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Scrumban\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Scrumban\\Tests\\": "/Tests/"
+        }
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "^1.9",
+        "doctrine/orm": "^2.6"
     }
 }
