@@ -1,0 +1,16 @@
+{
+    "name": "kalaxia/scrumban-bundle",
+    "description": "Symfony bundle to wrap your project sprints data from external boards",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Axel Venet",
+            "email": "kern046@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "symfony/framework-bundle": "^3.0||^4.0"
+    }
+}
