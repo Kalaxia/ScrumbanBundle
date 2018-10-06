@@ -31,6 +31,11 @@ class SprintManager
         return $this->om->getRepository(Sprint::class)->getCurrentSprint();
     }
     
+    public function get(int $id): ?Sprint
+    {
+        return $this->om->getRepository(Sprint::class)->find($id);
+    }
+    
     public function createSprint(\DateTime $beginAt, \DateTime $endedAt): Sprint
     {
         if ($beginAt >= $endedAt) {
