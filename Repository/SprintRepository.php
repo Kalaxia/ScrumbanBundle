@@ -20,6 +20,15 @@ class SprintRepository extends EntityRepository
             ->getOneOrNullResult();
     }
     
+    public function getPreviousSprint()
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.endedAt <= :now')
+            ->setParameters(['now' => (new \DateTime())->format('Y-m-d H:i:s')])
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+    
     public function getSprintByPeriod(\DateTime $beginAt, \DateTime $endedAt)
     {
         return $this->createQueryBuilder('s')

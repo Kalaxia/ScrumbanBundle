@@ -31,6 +31,11 @@ class SprintManager
         return $this->om->getRepository(Sprint::class)->getCurrentSprint();
     }
     
+    public function getPreviousSprint(): ?Sprint
+    {
+        return $this->om->getRepository(Sprint::class)->getPreviousSprint();
+    }
+    
     public function get(int $id): ?Sprint
     {
         return $this->om->getRepository(Sprint::class)->find($id);
