@@ -67,4 +67,11 @@ final class UserStoryManager
     {
         return $this->om->getRepository(UserStory::class)->findAll();
     }
+    
+    public function getSprintUserStories(Sprint $sprint, array $orderBy = null, int $page = null, int $limit = null): array
+    {
+        return $this->om->getRepository(UserStory::class)->findBy([
+            'sprint' => $sprint
+        ], $orderBy, $limit, $page * $limit);
+    }
 }
