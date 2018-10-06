@@ -29,6 +29,11 @@ class SprintManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Sprint::class, $this->manager->getCurrentSprint());
     }
     
+    public function testPreviousSprint()
+    {
+        $this->assertInstanceOf(Sprint::class, $this->manager->getPreviousSprint());
+    }
+    
     public function testCreate()
     {
         $beginAt = new \DateTime('+12 days');
@@ -88,6 +93,11 @@ class SprintManagerTest extends \PHPUnit\Framework\TestCase
         $repositoryMock
             ->expects($this->any())
             ->method('getCurrentSprint')
+            ->willReturnCallback([$this, 'getSprintMock'])
+        ;
+        $repositoryMock
+            ->expects($this->any())
+            ->method('getPreviousSprint')
             ->willReturnCallback([$this, 'getSprintMock'])
         ;
         $repositoryMock
