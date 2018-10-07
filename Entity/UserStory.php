@@ -64,7 +64,7 @@ class UserStory extends UserStoryModel
      */
     public function prePersist()
     {
-        $this->createdAt = $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
     
     /**
