@@ -30,4 +30,4 @@ services:
     Scrumban\Gateway\TrelloGateway:
         public: false
         arguments:
-            $trelloUrl: 'https://api.trello.com'
+            $baseUri: 'https://api.trello.com'
