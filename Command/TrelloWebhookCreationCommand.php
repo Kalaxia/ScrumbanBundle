@@ -10,8 +10,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\Question;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 class TrelloWebhookCreationCommand extends ContainerAwareCommand
 {
     protected function configure()
@@ -31,7 +29,7 @@ class TrelloWebhookCreationCommand extends ContainerAwareCommand
         }
         $response = $this->getContainer()->get('scrumban.trello_manager')->createWebhook(
             $input->getArgument('board_name'),
-            "{$callbackUrl}/{$this->getContainer()->get(UrlGeneratorInterface::class)->generate('scrumban_trello_webhook')}"
+            $callbackUrl
         );
         
         dump($response);

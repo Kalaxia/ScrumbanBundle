@@ -66,6 +66,7 @@ class ScrumbanExtension extends Extension
         $container->getDefinition(\Scrumban\Registry\TrelloRegistry::class)->setPublic(true);
         $container->getDefinition(\Scrumban\Gateway\TrelloGateway::class)->setPublic(true);
         $boardManagerDefinition = $container->getDefinition('scrumban.trello_manager');
+        $boardManagerDefinition->setProperty('webhookRoute', 'scrumban_trello_webhook');
         
         if (isset($config['has_plus_for_trello'])) {
             $boardManagerDefinition->setProperty('hasPlusForTrello', $config['has_plus_for_trello']);

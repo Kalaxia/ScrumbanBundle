@@ -11,6 +11,8 @@ use Scrumban\Utils\PlusForTrelloHelper;
 
 use Scrumban\Entity\Sprint;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 class BoardManager
 {
     /** @var RegistryInterface **/
@@ -21,6 +23,10 @@ class BoardManager
     protected $userStoryManager;
     /** @var SprintManager **/
     protected $sprintManager;
+    /** @var UrlGeneratorInterface **/
+    protected $router;
+    /** @var string **/
+    public $webhookRoute;
     /** @var bool **/
     public $hasPlusForTrello;
     /** @var string **/
@@ -28,17 +34,24 @@ class BoardManager
     /** @var string **/
     public $apiKey;
     
-    public function __construct(RegistryInterface $registry, GatewayInterface $gateway, UserStoryManager $userStoryManager, SprintManager $sprintManager)
+    public function __construct(
+        RegistryInterface $registry,
+        GatewayInterface $gateway,
+        UserStoryManager $userStoryManager,
+        SprintManager $sprintManager,
+        UrlGeneratorInterface $router
+    )
     {
         $this->registry = $registry;
         $this->gateway = $gateway;
         $this->userStoryManager = $userStoryManager;
         $this->sprintManager = $sprintManager;
+        $this->router = $router;
     }
     
     public function createWebhook(string $boardId, string $callbackUrl)
     {
-        return $this->gateway->createWebhook($this->apiToken, $this->apiKey, $boardId, $callbackUrl);
+        return $this->gateway->createWebhook($this->apiToken, $this->apiKey, $boardId, $callbackUrl . $this->router->generate($this->webhookRoute));
     }
     
     public function sync($boardName)
