@@ -25,7 +25,7 @@ final class UserStoryManager
         $this->eventDispatcher = $eventDispatcher;
     }
     
-    public function createUserStory(string $id, string $title, string $description, string $value, string $status, float $estimatedTime, float $spentTime, Sprint $sprint = null): UserStory
+    public function createUserStory(string $id, string $title, string $description, string $value, string $status, float $estimatedTime, float $spentTime, \DateTime $createdAt, Sprint $sprint = null): UserStory
     {
         $userStory =
             (new UserStory())
@@ -36,6 +36,7 @@ final class UserStoryManager
             ->setStatus($status)
             ->setEstimatedTime($estimatedTime)
             ->setSpentTime($spentTime)
+            ->setCreatedAt($createdAt)
         ;
         if ($sprint !== null) {
             $userStory->setSprint($sprint);
@@ -46,7 +47,7 @@ final class UserStoryManager
         return $userStory;
     }
     
-    public function updateUserStory(string $id, string $title, string $description, string $value, string $status, float $estimatedTime, float $spentTime, Sprint $sprint = null, UserStory $userStory = null)
+    public function updateUserStory(string $id, string $title, string $description, string $value, string $status, float $estimatedTime, float $spentTime, \DateTime $createdAt, Sprint $sprint = null, UserStory $userStory = null)
     {
         $userStory
             ->setTitle($title)

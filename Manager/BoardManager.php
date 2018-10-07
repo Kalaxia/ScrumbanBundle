@@ -82,6 +82,7 @@ class BoardManager
                 $column['status'],
                 $estimations['estimated'],
                 $estimations['spent'],
+                CardHelper::extractCreationDate($card['id']),
                 CardHelper::isInCurrentSprint($column['status']) ? $sprint : null,
                 $userStory
             );
