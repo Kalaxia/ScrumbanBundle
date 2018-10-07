@@ -2,18 +2,8 @@
 
 namespace Scrumban\Gateway;
 
-use GuzzleHttp\Client;
-
 class TrelloGateway extends Gateway
 {
-    /** @var Client **/
-    protected $client;
-    
-    public function __construct($trelloUrl)
-    {
-        $this->client = new Client(['base_uri' => $trelloUrl]);
-    }
-    
     public function getBoard(string $id)
     {
         return $this->get("/1/boards/{$id}");
@@ -32,5 +22,14 @@ class TrelloGateway extends Gateway
     public function getCardComments(string $id)
     {
         return $this->get("/1/cards/{$id}/actions?filter=commentCard");
+    }
+    
+    public function createWebhook(string $apiToken, string $apiKey, string $boardId, string $url)
+    {
+        return $this->post("/1/tokens/{$apiToken}/webhooks/?key={$apiKey}", [
+            'description' => 'Scrumban Webhook',
+            'callbackUrl' => $url,
+            'idModel' => $boardId
+        ]);
     }
 }

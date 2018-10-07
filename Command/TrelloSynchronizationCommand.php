@@ -29,8 +29,6 @@ class TrelloSynchronizationCommand extends ContainerAwareCommand
         foreach ($messages as $type => $message) {
             $output->writeln("<{$type}>$message</{$type}>");
         }
-        $output->writeln(
-            "<fg=white;bg=green>\n\n Synchronization is complete !\n</>\n"
-        );
+        $output->writeln('<fg=white;bg=green>\n\n Synchronization is complete !\n</>\n');
     }
 }

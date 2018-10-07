@@ -23,6 +23,10 @@ class BoardManager
     protected $sprintManager;
     /** @var bool **/
     public $hasPlusForTrello;
+    /** @var string **/
+    public $apiToken;
+    /** @var string **/
+    public $apiKey;
     
     public function __construct(RegistryInterface $registry, GatewayInterface $gateway, UserStoryManager $userStoryManager, SprintManager $sprintManager)
     {
@@ -30,6 +34,11 @@ class BoardManager
         $this->gateway = $gateway;
         $this->userStoryManager = $userStoryManager;
         $this->sprintManager = $sprintManager;
+    }
+    
+    public function createWebhook(string $boardId, string $callbackUrl)
+    {
+        return $this->gateway->createWebhook($this->apiToken, $this->apiKey, $boardId, $callbackUrl);
     }
     
     public function sync($boardName)
