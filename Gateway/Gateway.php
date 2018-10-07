@@ -3,6 +3,7 @@
 namespace Scrumban\Gateway;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 
 abstract class Gateway implements GatewayInterface
 {
@@ -22,10 +23,7 @@ abstract class Gateway implements GatewayInterface
     public function post($url, array $data): array
     {
         return json_decode($this->client->post($url, [
-            'headers' => [
-                'Content-Type' => 'application/json'
-            ],
-            'body' => json_encode($data)
+            RequestOptions::JSON => $data
         ])->getBody()->getContents(), true);
     }
 }

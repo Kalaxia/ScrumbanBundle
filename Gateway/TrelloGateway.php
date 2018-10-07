@@ -28,7 +28,7 @@ class TrelloGateway extends Gateway
     {
         return $this->post("/1/tokens/{$apiToken}/webhooks/?key={$apiKey}", [
             'description' => 'Scrumban Webhook',
-            'callbackUrl' => $url,
+            'callbackURL' => $url,
             'idModel' => $boardId
         ]);
     }

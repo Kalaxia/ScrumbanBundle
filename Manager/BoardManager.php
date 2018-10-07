@@ -49,12 +49,16 @@ class BoardManager
         $this->router = $router;
     }
     
-    public function createWebhook(string $boardId, string $callbackUrl)
+    public function createWebhook(string $boardName, string $callbackUrl)
     {
-        return $this->gateway->createWebhook($this->apiToken, $this->apiKey, $boardId, $callbackUrl . $this->router->generate($this->webhookRoute));
+        if (($boardData = $this->registry->getBoard($boardName)) === null) {
+            throw new \InvalidArgumentException('No board is configured for the given name');
+        }
+        $board = $this->gateway->getBoard($boardData['id']);
+        return $this->gateway->createWebhook($this->apiToken, $this->apiKey, $board['id'], $callbackUrl . $this->router->generate($this->webhookRoute));
     }
     
-    public function sync($boardName)
+    public function sync(string $boardName)
     {
         if (($boardData = $this->registry->getBoard($boardName)) === null) {
             throw new \InvalidArgumentException('No board is configured for the given name');
