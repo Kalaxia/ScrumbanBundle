@@ -24,8 +24,10 @@ class SprintRepository extends EntityRepository
     {
         return $this->createQueryBuilder('s')
             ->where('s.endedAt <= :now')
+            ->orderBy('s.endedAt', 'DESC')
             ->setParameters(['now' => (new \DateTime())->format('Y-m-d H:i:s')])
             ->getQuery()
+            ->setMaxResults(1)
             ->getOneOrNullResult();
     }
     
