@@ -24,9 +24,9 @@ class CardHelper
         return 0;
     }
     
-    public static function extractCreationDate(array $card): \DateTime
+    public static function extractCreationDate(string $cardId): \DateTime
     {
-        return (new \DateTime())->setTimestamp(hexdec(substr($card['id'], 0, 8)));
+        return (new \DateTime())->setTimestamp(hexdec(substr($cardId, 0, 8)));
     }
     
     public static function isInCurrentSprint(string $status): bool
