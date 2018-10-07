@@ -18,6 +18,8 @@ class TrelloConfiguration implements ConfigurationInterface
                 ->arrayNode('trello')->canBeUnset()
                     ->children()
                         ->booleanNode('has_plus_for_trello')->end()
+                        ->scalarNode('api_key')->end()
+                        ->scalarNode('api_token')->end()
                         ->arrayNode('boards')
                             ->useAttributeAsKey('n')
                             ->prototype('array')

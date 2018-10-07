@@ -65,9 +65,16 @@ class ScrumbanExtension extends Extension
         
         $container->getDefinition(\Scrumban\Registry\TrelloRegistry::class)->setPublic(true);
         $container->getDefinition(\Scrumban\Gateway\TrelloGateway::class)->setPublic(true);
+        $boardManagerDefinition = $container->getDefinition('scrumban.trello_manager');
         
         if (isset($config['has_plus_for_trello'])) {
-            $container->getDefinition('scrumban.trello_manager')->setProperty('hasPlusForTrello', $config['has_plus_for_trello']);
+            $boardManagerDefinition->setProperty('hasPlusForTrello', $config['has_plus_for_trello']);
+        }
+        if (isset($config['api_key'])) {
+            $boardManagerDefinition->setProperty('apiKey', $config['api_key']);
+        }
+        if (isset($config['api_token'])) {
+            $boardManagerDefinition->setProperty('apiToken', $config['api_token']);
         }
     }
 }
